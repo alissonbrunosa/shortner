@@ -1,11 +1,11 @@
 package services
 
 import (
-"bytes"
-"regexp"
-"fmt"
-"log"
-"github.com/alissonbrunosa/shortner/internal/stores"
+	"bytes"
+	"fmt"
+	"github.com/alissonbrunosa/shortner/internal/stores"
+	"log"
+	"regexp"
 )
 
 type URL struct {
@@ -13,30 +13,30 @@ type URL struct {
 }
 
 func (this *URL) Find(key string) (string, error) {
-  return this.Store.Find(key)
+	return this.Store.Find(key)
 }
 
 func (this *URL) Create(link string) (string, error) {
-  regex := regexp.MustCompile(`^(http|https)://`)
-  
-  hex, err := Hex(4)
-  if err != nil {
-    return "", err
-  }
+	regex := regexp.MustCompile(`^(http|https)://`)
 
-  if !regex.MatchString(link) {
-    var buffer bytes.Buffer
-    buffer.WriteString("http://")
-    buffer.WriteString(link)
-    link = buffer.String()
-  }
+	hex, err := Hex(4)
+	if err != nil {
+		return "", err
+	}
 
-  fail := this.Store.Create(hex, link)
-  if fail != nil {
-    return "", fail
-  }
+	if !regex.MatchString(link) {
+		var buffer bytes.Buffer
+		buffer.WriteString("http://")
+		buffer.WriteString(link)
+		link = buffer.String()
+	}
 
-  newLink := fmt.Sprintf("http://localhost:8080/%s", hex)
+	fail := this.Store.Create(hex, link)
+	if fail != nil {
+		return "", fail
+	}
+
+	newLink := fmt.Sprintf("http://localhost:8080/%s", hex)
 	return newLink, nil
 }
 

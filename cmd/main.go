@@ -9,11 +9,11 @@ import (
 func initServer() *routes.Server {
 	return &routes.Server{
 		Dispatcher: routes.NewDispatcher(),
-    URLHandler: routes.NewURLHandler(),
+		URLHandler: routes.NewURLHandler(),
 	}
 }
 
 func main() {
-  server := initServer()
+	server := initServer()
 	log.Fatal(http.ListenAndServe(":8080", server.GetRouter()))
 }

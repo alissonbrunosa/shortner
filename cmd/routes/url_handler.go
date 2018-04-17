@@ -1,9 +1,9 @@
 package routes
 
 import (
+	"fmt"
 	"github.com/alissonbrunosa/shortner/internal/services"
 	"net/http"
-	"fmt"
 )
 
 type URLHandler struct {

@@ -7,7 +7,7 @@ import (
 )
 
 type Dispatcher struct {
-	Service *services.PathExtractor
+	Service    *services.PathExtractor
 	URLService *services.URL
 }
 
@@ -19,12 +19,12 @@ func (this *Dispatcher) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 		writer.WriteHeader(500)
 		fmt.Fprint(writer, "<h1>Ops...</h1><h3>Deu ruim!</h3>")
 		return
-	} 
+	}
 
-  if link != "" {
+	if link != "" {
 		http.Redirect(writer, request, link, 301)
 		return
-	} 
+	}
 
 	writer.WriteHeader(404)
 	fmt.Fprint(writer, "<h1>Ops...</h1><h3>Page not found</h3>")
@@ -33,7 +33,7 @@ func (this *Dispatcher) ServeHTTP(writer http.ResponseWriter, request *http.Requ
 
 func NewDispatcher() *Dispatcher {
 	return &Dispatcher{
-		Service: services.NewPathExtractor(),
+		Service:    services.NewPathExtractor(),
 		URLService: services.NewURLService(),
 	}
 }
