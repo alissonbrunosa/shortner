@@ -1,0 +1,16 @@
+version: '2'
+services:
+  web:
+    build: .
+    command: "go run cmd/main.go"
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/go/src/github.com/alissonbrunosa/shortner
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
+    volumes:
+      - /docker/shortner/redis:/data
